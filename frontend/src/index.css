@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* Open Agri Stack palette */
+        --oas-bg: 76 25% 98%;          /* #FAFBF8 */
+        --oas-surface: 0 0% 100%;      /* #FFFFFF */
+        --oas-section: 90 15% 95%;     /* #F4F6F2 */
+        --oas-ink: 210 21% 16%;        /* #1F2933 */
+        --oas-ink-soft: 210 9% 40%;    /* #5B6770 */
+        --oas-border: 220 13% 91%;     /* #E4E7EB */
+        --oas-accent: 68 51% 57%;      /* #C0CF52 */
+        --oas-accent-ink: 68 60% 22%;
+
+        /* shadcn map */
+        --background: 76 25% 98%;
+        --foreground: 210 21% 16%;
+        --card: 0 0% 100%;
+        --card-foreground: 210 21% 16%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 210 21% 16%;
+        --primary: 210 21% 16%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 90 15% 95%;
+        --secondary-foreground: 210 21% 16%;
+        --muted: 90 15% 95%;
+        --muted-foreground: 210 9% 40%;
+        --accent: 68 51% 57%;
+        --accent-foreground: 68 60% 22%;
+        --destructive: 0 62% 45%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 220 13% 91%;
+        --input: 220 13% 91%;
+        --ring: 68 51% 57%;
+        --radius: 0.5rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+    body {
+        margin: 0;
+        font-family: "Inter Tight", ui-sans-serif, system-ui, -apple-system,
+            "Segoe UI", Roboto, sans-serif;
+        background: hsl(var(--oas-bg));
+        color: hsl(var(--oas-ink));
+        font-feature-settings: "cv11", "ss01", "ss03";
+    }
+    code, .mono {
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+            Consolas, monospace;
+    }
+    .font-serif-display {
+        font-family: "Instrument Serif", ui-serif, Georgia, serif;
+        font-feature-settings: "ss01";
+        letter-spacing: -0.01em;
+    }
+    ::selection {
+        background: hsl(var(--oas-accent) / 0.35);
+        color: hsl(var(--oas-ink));
+    }
+    :focus-visible {
+        outline: 2px solid hsl(var(--oas-accent));
+        outline-offset: 3px;
+        border-radius: 3px;
+    }
+}
+
+@layer utilities {
+    .oas-eyebrow {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: hsl(var(--oas-ink-soft));
+    }
+    .oas-grid-bg {
+        background-image:
+            linear-gradient(hsl(var(--oas-border) / 0.55) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--oas-border) / 0.55) 1px, transparent 1px);
+        background-size: 48px 48px;
+        background-position: -1px -1px;
+    }
+    .oas-dot-bg {
+        background-image: radial-gradient(
+            hsl(var(--oas-border)) 1px,
+            transparent 1px
+        );
+        background-size: 22px 22px;
+    }
+    .oas-card {
+        background: hsl(var(--oas-surface));
+        border: 1px solid hsl(var(--oas-border));
+        border-radius: 14px;
+    }
+    .oas-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid hsl(var(--oas-border));
+        background: hsl(var(--oas-surface));
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        color: hsl(var(--oas-ink-soft));
+    }
+    /* Sunken section — the light-on-light "reveal" background */
+    .oas-section-sunken {
+        background: hsl(var(--oas-section) / 0.6);
+        border-top: 1px solid hsl(var(--oas-border));
+        border-bottom: 1px solid hsl(var(--oas-border));
+    }
+    /* Chapter connector line — visually threads sections together */
+    .oas-thread {
+        position: relative;
+    }
+    .oas-thread::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            hsl(var(--oas-border)) 15%,
+            hsl(var(--oas-border)) 85%,
+            transparent
+        );
+        pointer-events: none;
+        display: none;
+    }
+    @media (min-width: 1024px) {
+        .oas-thread::before {
+            display: block;
+        }
+    }
+}

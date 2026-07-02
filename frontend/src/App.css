@@ -1,0 +1,5 @@
+.App {
+    min-height: 100vh;
+    background: hsl(var(--oas-bg));
+    color: hsl(var(--oas-ink));
+}
