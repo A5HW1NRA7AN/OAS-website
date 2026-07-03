@@ -47,7 +47,7 @@ export default function Nav() {
                     aria-label="Open Agri Stack — home"
                 >
                     <img
-                        src="/oas-logo.png"
+                        src="/oas-logo-clean.png"
                         alt="Open Agri Stack"
                         className="h-9 w-9 rounded-md object-contain bg-oas-ink p-1"
                     />

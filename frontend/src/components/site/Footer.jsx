@@ -25,7 +25,7 @@ export default function Footer() {
                     <div>
                         <div className="flex items-center gap-3">
                             <img
-                                src="/oas-logo.png"
+                                src="/oas-logo-clean.png"
                                 alt="Open Agri Stack"
                                 className="h-11 w-11 rounded-md object-contain bg-black/40 p-1"
                             />

@@ -148,7 +148,7 @@ function LogoAnchor() {
                 </svg>
 
                 <img
-                    src="/oas-logo.png"
+                    src="/oas-logo-clean.png"
                     alt="Open Agri Stack logo"
                     className="absolute inset-0 w-full h-full object-contain p-8 lg:p-12"
                 />
