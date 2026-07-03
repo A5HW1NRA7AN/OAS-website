@@ -4,37 +4,44 @@
 
 @layer base {
     :root {
-        /* Open Agri Stack palette */
-        --oas-bg: 76 25% 98%;          /* #FAFBF8 */
-        --oas-surface: 0 0% 100%;      /* #FFFFFF */
-        --oas-section: 90 15% 95%;     /* #F4F6F2 */
-        --oas-ink: 210 21% 16%;        /* #1F2933 */
-        --oas-ink-soft: 210 9% 40%;    /* #5B6770 */
-        --oas-border: 220 13% 91%;     /* #E4E7EB */
-        --oas-accent: 68 51% 57%;      /* #C0CF52 */
-        --oas-accent-ink: 68 60% 22%;
+        /* Open Agri Stack palette — light theme, deeper green accent */
+        --oas-bg: 76 25% 98%;             /* #FAFBF8 warm off-white */
+        --oas-surface: 0 0% 100%;          /* #FFFFFF */
+        --oas-section: 80 30% 96%;         /* very light green tint */
+        --oas-section-strong: 78 32% 92%;  /* stronger green tint band */
+        --oas-ink: 200 22% 12%;            /* near-black, cool */
+        --oas-ink-soft: 210 9% 40%;
+        --oas-border: 90 15% 89%;          /* slight green in border */
+        --oas-border-strong: 80 20% 82%;
+
+        /* Green scale — the OAS accent family */
+        --oas-lime: 68 51% 57%;            /* #C0CF52 primary */
+        --oas-lime-soft: 68 60% 78%;
+        --oas-lime-tint: 74 55% 92%;
+        --oas-forest: 90 40% 22%;          /* deep green ink */
+        --oas-forest-soft: 90 30% 34%;
 
         /* shadcn map */
         --background: 76 25% 98%;
-        --foreground: 210 21% 16%;
+        --foreground: 200 22% 12%;
         --card: 0 0% 100%;
-        --card-foreground: 210 21% 16%;
+        --card-foreground: 200 22% 12%;
         --popover: 0 0% 100%;
-        --popover-foreground: 210 21% 16%;
-        --primary: 210 21% 16%;
+        --popover-foreground: 200 22% 12%;
+        --primary: 90 40% 22%;
         --primary-foreground: 0 0% 100%;
-        --secondary: 90 15% 95%;
-        --secondary-foreground: 210 21% 16%;
-        --muted: 90 15% 95%;
+        --secondary: 80 30% 96%;
+        --secondary-foreground: 200 22% 12%;
+        --muted: 80 30% 96%;
         --muted-foreground: 210 9% 40%;
         --accent: 68 51% 57%;
-        --accent-foreground: 68 60% 22%;
+        --accent-foreground: 90 40% 22%;
         --destructive: 0 62% 45%;
         --destructive-foreground: 0 0% 100%;
-        --border: 220 13% 91%;
-        --input: 220 13% 91%;
+        --border: 90 15% 89%;
+        --input: 90 15% 89%;
         --ring: 68 51% 57%;
-        --radius: 0.5rem;
+        --radius: 0.75rem;
     }
 }
 
@@ -66,11 +73,11 @@
         letter-spacing: -0.01em;
     }
     ::selection {
-        background: hsl(var(--oas-accent) / 0.35);
-        color: hsl(var(--oas-ink));
+        background: hsl(var(--oas-lime) / 0.4);
+        color: hsl(var(--oas-forest));
     }
     :focus-visible {
-        outline: 2px solid hsl(var(--oas-accent));
+        outline: 2px solid hsl(var(--oas-lime));
         outline-offset: 3px;
         border-radius: 3px;
     }
@@ -80,27 +87,23 @@
     .oas-eyebrow {
         font-family: "JetBrains Mono", ui-monospace, monospace;
         font-size: 11px;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: hsl(var(--oas-ink-soft));
+        color: hsl(var(--oas-forest-soft));
     }
-    .oas-grid-bg {
-        background-image:
-            linear-gradient(hsl(var(--oas-border) / 0.55) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--oas-border) / 0.55) 1px, transparent 1px);
-        background-size: 48px 48px;
-        background-position: -1px -1px;
+    .oas-eyebrow-accent {
+        color: hsl(var(--oas-forest));
     }
-    .oas-dot-bg {
-        background-image: radial-gradient(
-            hsl(var(--oas-border)) 1px,
-            transparent 1px
-        );
-        background-size: 22px 22px;
-    }
+    /* Neutral card — used on all backgrounds */
     .oas-card {
         background: hsl(var(--oas-surface));
         border: 1px solid hsl(var(--oas-border));
+        border-radius: 14px;
+    }
+    /* Green-tinted card for accented content */
+    .oas-card-tint {
+        background: hsl(var(--oas-lime-tint));
+        border: 1px solid hsl(var(--oas-lime-soft));
         border-radius: 14px;
     }
     .oas-chip {
@@ -114,38 +117,87 @@
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
         letter-spacing: 0.06em;
-        color: hsl(var(--oas-ink-soft));
+        color: hsl(var(--oas-forest-soft));
     }
-    /* Sunken section — the light-on-light "reveal" background */
-    .oas-section-sunken {
-        background: hsl(var(--oas-section) / 0.6);
+    .oas-chip-accent {
+        background: hsl(var(--oas-lime-tint));
+        border-color: hsl(var(--oas-lime-soft));
+        color: hsl(var(--oas-forest));
+    }
+    /* Section variants — alternating rhythm */
+    .oas-band-tint {
+        background: linear-gradient(
+            180deg,
+            hsl(var(--oas-section) / 0.4) 0%,
+            hsl(var(--oas-section) / 0.75) 50%,
+            hsl(var(--oas-section) / 0.4) 100%
+        );
         border-top: 1px solid hsl(var(--oas-border));
         border-bottom: 1px solid hsl(var(--oas-border));
     }
-    /* Chapter connector line — visually threads sections together */
-    .oas-thread {
-        position: relative;
+    .oas-band-strong {
+        background: hsl(var(--oas-section-strong) / 0.7);
+        border-top: 1px solid hsl(var(--oas-border-strong));
+        border-bottom: 1px solid hsl(var(--oas-border-strong));
     }
-    .oas-thread::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 0;
-        bottom: 0;
+    /* Ambient background primitives */
+    .oas-grid-fine {
+        background-image:
+            linear-gradient(hsl(var(--oas-border) / 0.55) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--oas-border) / 0.55) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+    /* Primary green pill button */
+    .oas-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        background: hsl(var(--oas-forest));
+        color: hsl(var(--oas-bg));
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    .oas-btn-primary:hover {
+        background: hsl(var(--oas-forest-soft));
+        transform: translateY(-1px);
+    }
+    .oas-btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        border: 1px solid hsl(var(--oas-border-strong));
+        background: hsl(var(--oas-surface));
+        color: hsl(var(--oas-ink));
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .oas-btn-ghost:hover {
+        border-color: hsl(var(--oas-forest));
+        background: hsl(var(--oas-lime-tint));
+    }
+    /* Section connector line */
+    .oas-connector {
+        display: block;
         width: 1px;
         background: linear-gradient(
             to bottom,
             transparent,
-            hsl(var(--oas-border)) 15%,
-            hsl(var(--oas-border)) 85%,
+            hsl(var(--oas-lime-soft)) 30%,
+            hsl(var(--oas-lime-soft)) 70%,
             transparent
         );
-        pointer-events: none;
-        display: none;
     }
-    @media (min-width: 1024px) {
-        .oas-thread::before {
-            display: block;
-        }
+    @keyframes oas-flow {
+        0% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: -60; }
+    }
+    .oas-flow-line {
+        animation: oas-flow 6s linear infinite;
     }
 }

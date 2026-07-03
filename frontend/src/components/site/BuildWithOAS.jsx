@@ -1,27 +1,22 @@
-import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { Landmark, IdCard, Network, Route, Sparkles } from "lucide-react";
 import Section, { SectionHeader } from "@/components/site/Section";
-import { APPLICATIONS, REGISTRIES } from "@/data/architecture";
+import { APPLICATIONS } from "@/data/architecture";
 
-const ALL_BLOCKS = REGISTRIES.map((r) => ({ id: r.id, title: r.title, kind: r.kind }));
+const ICON_MAP = {
+    Landmark,
+    IdCard,
+    Network,
+    Route,
+    Sparkles,
+};
 
-export default function BuildWithOAS() {
-    const [selected, setSelected] = useState(new Set(["farmer", "plot", "crop"]));
-
-    const toggle = (id) => {
-        const next = new Set(selected);
-        if (next.has(id)) next.delete(id);
-        else next.add(id);
-        setSelected(next);
-    };
-
-    const matches = useMemo(() => {
-        return APPLICATIONS.map((app) => {
-            const has = app.needs.filter((n) => selected.has(n)).length;
-            return { ...app, coverage: has / app.needs.length };
-        }).sort((a, b) => b.coverage - a.coverage);
-    }, [selected]);
-
+/**
+ * Composable Applications — premium value-prop cards.
+ * No composer, no coverage %, no progress bars.
+ * This section communicates what OAS enables, not project progress.
+ */
+export default function ComposableApplications() {
     return (
         <section id="build" data-testid="section-build" className="relative py-24 lg:py-32">
             <Section>
@@ -31,134 +26,138 @@ export default function BuildWithOAS() {
                     description="Applications are created by combining reusable infrastructure rather than building isolated systems. Open Agri Stack enables organizations to assemble solutions using interoperable building blocks."
                 />
 
-                <div className="mt-14 lg:mt-20 grid lg:grid-cols-[1fr_1.15fr] gap-10 lg:gap-14 items-start">
-                    <div className="oas-card p-6 lg:p-8">
-                        <div className="flex items-center justify-between mb-5">
-                            <span className="mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft">
-                                COMPOSER · SELECT BUILDING BLOCKS
-                            </span>
-                            <span className="oas-chip !text-[10px]">
-                                {selected.size}/{ALL_BLOCKS.length}
-                            </span>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
-                            {ALL_BLOCKS.map((b) => {
-                                const on = selected.has(b.id);
-                                return (
-                                    <button
-                                        key={b.id}
-                                        data-testid={`block-${b.id}`}
-                                        onClick={() => toggle(b.id)}
-                                        className={`text-left rounded-[10px] border px-4 py-3.5 transition-all ${
-                                            on
-                                                ? "border-oas-ink bg-oas-accent/25"
-                                                : "border-oas-border bg-oas-bg/60 hover:border-oas-ink/40"
-                                        }`}
-                                    >
-                                        <div className="flex items-center gap-2 mb-1.5">
-                                            <span
-                                                className={`w-3 h-3 rounded-[3px] border ${
-                                                    on
-                                                        ? "bg-oas-accent border-oas-ink"
-                                                        : "border-oas-border"
-                                                }`}
-                                            />
-                                            <span className="mono text-[10px] text-oas-ink-soft">
-                                                {b.kind}
-                                            </span>
-                                        </div>
-                                        <div className="text-[14px] text-oas-ink">{b.title}</div>
-                                    </button>
-                                );
-                            })}
-                        </div>
-
-                        <p className="mt-6 mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft">
-                            → SELECTED BLOCKS PROJECT INTO EACH APPLICATION ↓
-                        </p>
-                    </div>
-
-                    <div className="flex flex-col gap-3">
-                        <AnimatePresence>
-                            {matches.map((app) => (
-                                <ApplicationCard key={app.id} app={app} selected={selected} />
-                            ))}
-                        </AnimatePresence>
-                    </div>
+                <div className="mt-14 lg:mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+                    {APPLICATIONS.map((app, i) => (
+                        <AppCard key={app.id} app={app} index={i} />
+                    ))}
+                    {/* Bookend card — invitation to compose */}
+                    <ComposeCard />
                 </div>
             </Section>
         </section>
     );
 }
 
-function ApplicationCard({ app, selected }) {
-    const pct = Math.round(app.coverage * 100);
-    const complete = app.coverage === 1;
+function AppCard({ app, index }) {
+    const Icon = ICON_MAP[app.icon] || Sparkles;
     return (
-        <motion.div
-            layout
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className={`oas-card p-6 lg:p-7 relative overflow-hidden ${
-                complete ? "border-oas-ink" : ""
-            }`}
+        <motion.article
             data-testid={`application-${app.id}`}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: index * 0.06 }}
+            className="group relative oas-card p-7 lg:p-8 flex flex-col min-h-[280px] overflow-hidden hover:border-oas-forest/40 transition-colors"
         >
-            <div className="flex items-start justify-between gap-6">
-                <div>
-                    <div className="flex items-center gap-3">
-                        <h3 className="font-serif-display text-[28px] leading-none text-oas-ink">
-                            {app.title}
-                        </h3>
-                        {complete && (
-                            <span className="oas-chip !bg-oas-accent/40 !border-oas-accent-ink !text-oas-accent-ink">
-                                READY
-                            </span>
-                        )}
-                    </div>
-                    <p className="mt-2 text-[14.5px] leading-[1.55] text-oas-ink-soft max-w-[520px]">
-                        {app.blurb}
-                    </p>
-                </div>
-                <div className="text-right shrink-0">
-                    <div className="mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft">
-                        COVERAGE
-                    </div>
-                    <div className="font-serif-display text-[30px] leading-none text-oas-ink mt-1">
-                        {pct}
-                        <span className="text-[16px] text-oas-ink-soft">%</span>
-                    </div>
-                </div>
+            {/* Accent underline on hover */}
+            <div
+                aria-hidden
+                className="absolute inset-x-0 bottom-0 h-[3px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"
+                style={{ background: "hsl(var(--oas-lime))" }}
+            />
+
+            {/* Icon */}
+            <div
+                className="w-11 h-11 rounded-xl grid place-items-center mb-6 transition-transform duration-300 group-hover:-translate-y-0.5"
+                style={{
+                    background: "hsl(var(--oas-lime-tint))",
+                    color: "hsl(var(--oas-forest))",
+                    border: "1px solid hsl(var(--oas-lime-soft))",
+                }}
+            >
+                <Icon size={20} strokeWidth={1.6} />
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-1.5">
-                {app.needs.map((n) => {
-                    const r = REGISTRIES.find((x) => x.id === n);
-                    const on = selected.has(n);
-                    return (
-                        <span
-                            key={n}
-                            className={`oas-chip !text-[10.5px] ${
-                                on
-                                    ? "!bg-oas-accent/30 !border-oas-accent-ink !text-oas-accent-ink"
-                                    : ""
-                            }`}
-                        >
-                            {on ? "✓" : "○"} {r?.title || n}
-                        </span>
-                    );
-                })}
+            <h3 className="font-serif-display text-[24px] lg:text-[26px] leading-[1.1] text-oas-ink">
+                {app.title}
+            </h3>
+            <p className="mt-3 text-[14.5px] leading-[1.6] text-oas-ink-soft flex-1">
+                {app.blurb}
+            </p>
+
+            <div className="mt-6 pt-5 border-t border-oas-border flex items-center justify-between">
+                <span className="mono text-[10px] tracking-[0.16em] text-oas-forest-soft">
+                    OAS · APPLICATION
+                </span>
+                <svg
+                    className="w-4 h-4 text-oas-ink-soft group-hover:translate-x-1 group-hover:text-oas-forest transition-all"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                >
+                    <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
+            </div>
+        </motion.article>
+    );
+}
+
+function ComposeCard() {
+    return (
+        <motion.article
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: 0.36 }}
+            className="relative rounded-[14px] overflow-hidden min-h-[280px] p-7 lg:p-8 flex flex-col"
+            style={{
+                background:
+                    "linear-gradient(135deg, hsl(var(--oas-ink)) 0%, hsl(200 22% 18%) 100%)",
+                color: "hsl(var(--oas-bg))",
+            }}
+            data-testid="application-compose"
+        >
+            {/* Subtle grid */}
+            <svg
+                className="absolute inset-0 w-full h-full opacity-[0.05]"
+                viewBox="0 0 400 400"
+                preserveAspectRatio="xMidYMid slice"
+            >
+                <defs>
+                    <pattern id="oas-compose-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                        <path d="M 24 0 L 0 0 0 24" fill="none" stroke="white" strokeWidth="0.5" />
+                    </pattern>
+                </defs>
+                <rect width="400" height="400" fill="url(#oas-compose-grid)" />
+            </svg>
+
+            <div className="relative">
+                <div
+                    className="oas-eyebrow"
+                    style={{ color: "hsl(var(--oas-lime))" }}
+                >
+                    Compose your own
+                </div>
+                <h3 className="mt-4 font-serif-display text-[26px] lg:text-[30px] leading-[1.05]">
+                    Assemble applications from the shared stack.
+                </h3>
+                <p className="mt-3 text-[14px] leading-[1.6] text-oas-bg/70 max-w-[280px]">
+                    Explore the registries, catalogues and protocols that let you
+                    build without rebuilding.
+                </p>
             </div>
 
-            <div className="mt-5 h-[3px] w-full rounded-full bg-oas-border/70 overflow-hidden">
-                <motion.div
-                    initial={false}
-                    animate={{ width: `${pct}%` }}
-                    transition={{ type: "spring", stiffness: 140, damping: 22 }}
-                    className="h-full bg-oas-accent"
-                />
-            </div>
-        </motion.div>
+            <a
+                href="#registries"
+                className="mt-auto relative inline-flex items-center gap-2 text-[13.5px] font-medium"
+                style={{ color: "hsl(var(--oas-lime))" }}
+            >
+                Explore the building blocks
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
+            </a>
+        </motion.article>
     );
 }

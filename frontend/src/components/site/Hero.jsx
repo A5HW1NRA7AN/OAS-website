@@ -1,27 +1,33 @@
 import { motion } from "framer-motion";
 import Section from "@/components/site/Section";
 
+/**
+ * Hero — logo becomes the primary visual anchor.
+ * No invented per-hero diagram. The living blueprint background is the
+ * ambient technical layer, per Design Review Round 1.
+ */
 export default function Hero() {
     return (
         <section
             id="hero"
             data-testid="section-hero"
-            className="relative pt-[112px] pb-24 lg:pt-[152px] lg:pb-32 overflow-hidden"
+            className="relative pt-[128px] pb-24 lg:pt-[168px] lg:pb-32"
         >
-            <div className="absolute inset-0 oas-dot-bg opacity-[0.55] pointer-events-none" />
-            <div className="absolute inset-x-0 top-0 h-[280px] bg-gradient-to-b from-oas-bg via-oas-bg to-transparent pointer-events-none" />
-
             <Section className="relative">
-                <div className="grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-16 items-center">
+                <div className="grid lg:grid-cols-[1fr_1.05fr] gap-14 lg:gap-20 items-center">
+                    {/* Copy column */}
                     <div>
                         <motion.div
                             initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
-                            className="flex items-center gap-3 mb-6"
+                            className="flex items-center gap-3 mb-8"
                         >
-                            <span className="oas-chip">
-                                <span className="w-1.5 h-1.5 rounded-full bg-oas-accent animate-oas-pulse" />
+                            <span className="oas-chip oas-chip-accent">
+                                <span
+                                    className="w-1.5 h-1.5 rounded-full"
+                                    style={{ background: "hsl(var(--oas-forest))" }}
+                                />
                                 Part of the OpenAgriNet ecosystem
                             </span>
                             <span className="oas-eyebrow hidden sm:inline">
@@ -36,11 +42,19 @@ export default function Hero() {
                             className="font-serif-display text-[46px] sm:text-[58px] lg:text-[72px] leading-[0.98] tracking-[-0.02em] text-oas-ink"
                         >
                             Building the Digital{" "}
-                            <span className="italic text-oas-ink-soft">Public</span>{" "}
+                            <span className="italic text-oas-forest-soft">
+                                Public
+                            </span>{" "}
                             Infrastructure for{" "}
                             <span className="relative inline-block">
                                 <span className="relative z-10">Agriculture.</span>
-                                <span className="absolute inset-x-0 bottom-1 h-[10px] bg-oas-accent/40 -z-0 rounded-sm" />
+                                <span
+                                    className="absolute inset-x-0 bottom-1 h-[10px] -z-0 rounded-sm"
+                                    style={{
+                                        background:
+                                            "hsl(var(--oas-lime) / 0.45)",
+                                    }}
+                                />
                             </span>
                         </motion.h1>
 
@@ -62,12 +76,12 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7, delay: 0.25 }}
-                            className="mt-9 flex flex-wrap items-center gap-3"
+                            className="mt-10 flex flex-wrap items-center gap-3"
                         >
                             <a
                                 href="#architecture"
                                 data-testid="hero-cta-architecture"
-                                className="inline-flex items-center gap-2 rounded-full bg-oas-ink text-oas-bg px-5 py-3 text-[14px] font-medium hover:bg-oas-ink-soft transition-colors"
+                                className="oas-btn-primary"
                             >
                                 Explore the Architecture
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -77,178 +91,86 @@ export default function Hero() {
                             <a
                                 href="#"
                                 data-testid="hero-cta-docs"
-                                className="inline-flex items-center gap-2 rounded-full border border-oas-border bg-oas-surface text-oas-ink px-5 py-3 text-[14px] font-medium hover:bg-oas-section transition-colors"
+                                className="oas-btn-ghost"
                             >
                                 View Documentation ↗
                             </a>
                         </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.9, delay: 0.55 }}
-                            className="mt-14 grid grid-cols-3 gap-6 max-w-[520px]"
-                        >
-                            {[
-                                ["L1", "Foundational DPI"],
-                                ["L2", "Agri Building Blocks"],
-                                ["L3", "Applications & Services"],
-                            ].map(([code, label]) => (
-                                <div key={code} className="border-t border-oas-border pt-3">
-                                    <div className="mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft">
-                                        {code}
-                                    </div>
-                                    <div className="mt-1 text-[13.5px] text-oas-ink">
-                                        {label}
-                                    </div>
-                                </div>
-                            ))}
-                        </motion.div>
                     </div>
 
-                    <HeroBlueprint />
+                    {/* Logo column — primary visual anchor */}
+                    <LogoAnchor />
                 </div>
             </Section>
         </section>
     );
 }
 
-function HeroBlueprint() {
+function LogoAnchor() {
     return (
         <motion.div
-            initial="hidden"
-            animate="show"
-            variants={{
-                hidden: {},
-                show: { transition: { staggerChildren: 0.22, delayChildren: 0.4 } },
-            }}
-            className="relative aspect-[5/6] lg:aspect-[4/5] w-full oas-card p-6 lg:p-8 overflow-hidden"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.2, 0.7, 0.2, 1] }}
+            className="relative mx-auto lg:mx-0 w-full max-w-[520px] aspect-square"
         >
-            <div className="absolute inset-0 oas-grid-bg opacity-40 pointer-events-none" />
-            <div className="absolute top-4 left-5 right-5 flex items-center justify-between">
-                <span className="mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft">
-                    OAS · REFERENCE BLUEPRINT
-                </span>
-                <span className="oas-chip !py-0.5 !text-[10px]">v1.0</span>
-            </div>
-
-            <svg viewBox="0 0 400 500" className="relative w-full h-full mt-3" aria-hidden>
-                <motion.g
-                    stroke="hsl(var(--oas-ink))"
-                    strokeOpacity="0.18"
-                    strokeWidth="1"
-                    fill="none"
-                    variants={{
-                        hidden: { pathLength: 0, opacity: 0 },
-                        show: { pathLength: 1, opacity: 1, transition: { duration: 1.2, delay: 1.1 } },
-                    }}
+            {/* Soft green halo behind logo */}
+            <div
+                className="absolute inset-0 rounded-[36px]"
+                style={{
+                    background:
+                        "radial-gradient(closest-side, hsl(74 55% 82% / 0.7), transparent 75%)",
+                }}
+            />
+            {/* Corner framing marks */}
+            <CornerMarks />
+            <div
+                className="absolute inset-4 lg:inset-6 rounded-[24px] overflow-hidden"
+                style={{
+                    background:
+                        "linear-gradient(135deg, hsl(var(--oas-ink)) 0%, hsl(200 22% 18%) 100%)",
+                    boxShadow:
+                        "0 20px 60px -20px hsl(var(--oas-ink) / 0.35), 0 6px 18px -8px hsl(var(--oas-ink) / 0.25)",
+                }}
+            >
+                {/* Subtle inner grid */}
+                <svg
+                    className="absolute inset-0 w-full h-full opacity-[0.06]"
+                    viewBox="0 0 400 400"
+                    preserveAspectRatio="xMidYMid slice"
                 >
-                    <path d="M80,380 L120,290" />
-                    <path d="M160,380 L180,290" />
-                    <path d="M240,380 L240,290" />
-                    <path d="M320,380 L300,290" />
-                    <path d="M120,240 L150,150" />
-                    <path d="M200,240 L200,150" />
-                    <path d="M280,240 L260,150" />
-                </motion.g>
+                    <defs>
+                        <pattern id="oas-hero-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" strokeWidth="0.5" />
+                        </pattern>
+                    </defs>
+                    <rect width="400" height="400" fill="url(#oas-hero-grid)" />
+                </svg>
 
-                <Layer y={110} label="L3 · APPLICATIONS">
-                    {[110, 200, 290].map((x, i) => (
-                        <Node
-                            key={i}
-                            x={x}
-                            y={130}
-                            label={["Advisory", "Credit", "Market"][i]}
-                            accent={i === 1}
-                        />
-                    ))}
-                </Layer>
+                <img
+                    src="/oas-logo.png"
+                    alt="Open Agri Stack logo"
+                    className="absolute inset-0 w-full h-full object-contain p-8 lg:p-12"
+                />
 
-                <Layer y={250} label="L2 · AGRICULTURE">
-                    {[110, 200, 290].map((x, i) => (
-                        <Node key={i} x={x} y={270} label={["Farmer", "Plot", "Crop"][i]} />
-                    ))}
-                </Layer>
-
-                <Layer y={390} label="L1 · FOUNDATION">
-                    {[80, 160, 240, 320].map((x, i) => (
-                        <Node
-                            key={i}
-                            x={x}
-                            y={410}
-                            label={["ID", "Consent", "UASI", "Payments"][i]}
-                            small
-                        />
-                    ))}
-                </Layer>
-            </svg>
-
-            <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between">
-                <span className="mono text-[10px] tracking-[0.14em] text-oas-ink-soft">
-                    scroll to reveal →
-                </span>
-                <span className="mono text-[10px] tracking-[0.14em] text-oas-ink-soft">
-                    03 LAYERS
-                </span>
+                {/* Bottom metadata band */}
+                <div className="absolute inset-x-6 bottom-5 flex items-center justify-between mono text-[10px] tracking-[0.18em] text-oas-bg/60">
+                    <span>OAS · OFFICIAL MARK</span>
+                    <span>v1.0</span>
+                </div>
             </div>
         </motion.div>
     );
 }
 
-function Layer({ children, label, y }) {
+function CornerMarks() {
+    const corner = "absolute w-4 h-4 border-oas-forest/40";
     return (
-        <motion.g
-            variants={{
-                hidden: { opacity: 0, y: 6 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-            }}
-        >
-            <line x1="20" x2="380" y1={y - 34} y2={y - 34} stroke="hsl(var(--oas-border))" />
-            <text
-                x="20"
-                y={y - 40}
-                fontSize="9.5"
-                letterSpacing="1.5"
-                fill="hsl(var(--oas-ink-soft))"
-                fontFamily="JetBrains Mono, monospace"
-            >
-                {label}
-            </text>
-            {children}
-        </motion.g>
-    );
-}
-
-function Node({ x, y, label, accent, small }) {
-    const w = small ? 62 : 76;
-    const h = small ? 26 : 34;
-    return (
-        <motion.g
-            variants={{
-                hidden: { opacity: 0, y: 6 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-            }}
-        >
-            <rect
-                x={x - w / 2}
-                y={y - h / 2}
-                width={w}
-                height={h}
-                rx="6"
-                fill={accent ? "hsl(var(--oas-accent))" : "hsl(var(--oas-surface))"}
-                stroke="hsl(var(--oas-border))"
-            />
-            <text
-                x={x}
-                y={y + 3.5}
-                textAnchor="middle"
-                fontSize={small ? "9.5" : "11"}
-                fontFamily="Inter Tight, sans-serif"
-                fill="hsl(var(--oas-ink))"
-                fontWeight="500"
-            >
-                {label}
-            </text>
-        </motion.g>
+        <>
+            <span className={`${corner} top-0 left-0 border-t border-l`} />
+            <span className={`${corner} top-0 right-0 border-t border-r`} />
+            <span className={`${corner} bottom-0 left-0 border-b border-l`} />
+            <span className={`${corner} bottom-0 right-0 border-b border-r`} />
+        </>
     );
 }

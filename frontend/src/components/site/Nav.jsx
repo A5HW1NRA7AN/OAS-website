@@ -26,7 +26,7 @@ export default function Nav() {
 
     const scrollTo = (id) => {
         const el = document.getElementById(id);
-        if (el) window.scrollTo({ top: el.offsetTop - 72, behavior: "smooth" });
+        if (el) window.scrollTo({ top: el.offsetTop - 76, behavior: "smooth" });
         setOpen(false);
     };
 
@@ -35,18 +35,23 @@ export default function Nav() {
             data-testid="site-nav"
             className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
                 scrolled
-                    ? "bg-oas-bg/85 backdrop-blur-md border-b border-oas-border"
+                    ? "bg-oas-bg/80 backdrop-blur-md border-b border-oas-border"
                     : "bg-transparent border-b border-transparent"
             }`}
         >
-            <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-[68px] flex items-center justify-between">
+            <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
                 <button
                     data-testid="nav-logo"
                     onClick={() => scrollTo("hero")}
-                    className="flex items-center gap-2.5 group"
+                    className="flex items-center gap-3 group"
+                    aria-label="Open Agri Stack — home"
                 >
-                    <LogoMark />
-                    <span className="font-serif-display text-[22px] leading-none text-oas-ink">
+                    <img
+                        src="/oas-logo.png"
+                        alt="Open Agri Stack"
+                        className="h-9 w-9 rounded-md object-contain bg-oas-ink p-1"
+                    />
+                    <span className="hidden sm:inline font-serif-display text-[22px] leading-none text-oas-ink">
                         Open Agri Stack
                     </span>
                 </button>
@@ -66,7 +71,8 @@ export default function Nav() {
                             {active === s.id && (
                                 <motion.span
                                     layoutId="nav-active"
-                                    className="absolute left-3 right-3 -bottom-0.5 h-[2px] bg-oas-accent rounded-full"
+                                    className="absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full"
+                                    style={{ background: "hsl(var(--oas-lime))" }}
                                 />
                             )}
                         </button>
@@ -77,14 +83,14 @@ export default function Nav() {
                     <a
                         data-testid="nav-github"
                         href="#"
-                        className="oas-chip hover:bg-oas-section transition-colors"
+                        className="oas-chip hover:oas-chip-accent transition-colors"
                     >
                         GitHub ↗
                     </a>
                     <a
                         data-testid="nav-gitbook"
                         href="#"
-                        className="inline-flex items-center gap-2 rounded-full bg-oas-ink text-oas-bg px-4 py-2 text-[13px] font-medium hover:bg-oas-ink-soft transition-colors"
+                        className="oas-btn-primary !py-2 !text-[13px]"
                     >
                         Documentation
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -105,10 +111,12 @@ export default function Nav() {
                 </button>
             </div>
 
-            {/* progress rail */}
             <motion.div
-                className="h-[2px] bg-oas-accent origin-left"
-                style={{ scaleX: scrollYProgress }}
+                className="h-[2px] origin-left"
+                style={{
+                    scaleX: scrollYProgress,
+                    background: "hsl(var(--oas-lime))",
+                }}
             />
 
             <AnimatePresence>
@@ -138,15 +146,5 @@ export default function Nav() {
                 )}
             </AnimatePresence>
         </header>
-    );
-}
-
-function LogoMark() {
-    return (
-        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden>
-            <rect x="1" y="1" width="24" height="24" rx="6" fill="hsl(var(--oas-surface))" stroke="hsl(var(--oas-border))" />
-            <circle cx="13" cy="13" r="3.5" fill="hsl(var(--oas-accent))" />
-            <circle cx="13" cy="13" r="6.5" stroke="hsl(var(--oas-ink))" strokeOpacity="0.35" strokeDasharray="2 2" />
-        </svg>
     );
 }

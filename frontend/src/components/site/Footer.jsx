@@ -4,44 +4,32 @@ export default function Footer() {
     return (
         <footer
             data-testid="site-footer"
-            className="relative bg-oas-ink text-oas-bg pt-20 pb-10 mt-8"
+            className="relative pt-20 pb-10 mt-8"
+            style={{
+                background: "hsl(var(--oas-ink))",
+                color: "hsl(var(--oas-bg))",
+            }}
         >
+            {/* Top accent hairline */}
+            <div
+                aria-hidden
+                className="absolute inset-x-0 top-0 h-px"
+                style={{
+                    background:
+                        "linear-gradient(to right, transparent, hsl(var(--oas-lime) / 0.7), transparent)",
+                }}
+            />
+
             <Section>
                 <div className="grid lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10">
                     <div>
-                        <div className="flex items-center gap-2.5">
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 26 26"
-                                fill="none"
-                            >
-                                <rect
-                                    x="1"
-                                    y="1"
-                                    width="24"
-                                    height="24"
-                                    rx="6"
-                                    fill="hsl(var(--oas-bg))"
-                                    stroke="hsl(var(--oas-bg))"
-                                    strokeOpacity="0.2"
-                                />
-                                <circle
-                                    cx="13"
-                                    cy="13"
-                                    r="3.5"
-                                    fill="hsl(var(--oas-accent))"
-                                />
-                                <circle
-                                    cx="13"
-                                    cy="13"
-                                    r="6.5"
-                                    stroke="hsl(var(--oas-ink))"
-                                    strokeOpacity="0.4"
-                                    strokeDasharray="2 2"
-                                />
-                            </svg>
-                            <span className="font-serif-display text-[22px]">
+                        <div className="flex items-center gap-3">
+                            <img
+                                src="/oas-logo.png"
+                                alt="Open Agri Stack"
+                                className="h-11 w-11 rounded-md object-contain bg-black/40 p-1"
+                            />
+                            <span className="font-serif-display text-[24px]">
                                 Open Agri Stack
                             </span>
                         </div>
@@ -51,7 +39,10 @@ export default function Footer() {
                             ecosystems through reusable building blocks, shared
                             standards, and open collaboration.
                         </p>
-                        <p className="mt-8 mono text-[10.5px] tracking-[0.14em] text-oas-bg/50">
+                        <p
+                            className="mt-8 mono text-[10.5px] tracking-[0.16em]"
+                            style={{ color: "hsl(var(--oas-lime))" }}
+                        >
                             REVEAL THE STACK · BUILD UNDERSTANDING
                         </p>
                     </div>
@@ -85,7 +76,7 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-16 pt-6 border-t border-oas-bg/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="mono text-[10.5px] tracking-[0.14em] text-oas-bg/50">
+                    <div className="mono text-[10.5px] tracking-[0.16em] text-oas-bg/50">
                         © OPEN AGRI STACK 2026
                     </div>
                     <div className="flex items-center gap-5 text-[13px] text-oas-bg/70">
@@ -108,7 +99,10 @@ export default function Footer() {
 function FooterCol({ title, links }) {
     return (
         <div>
-            <div className="mono text-[10.5px] tracking-[0.14em] text-oas-bg/60 mb-4">
+            <div
+                className="mono text-[10.5px] tracking-[0.16em] mb-4"
+                style={{ color: "hsl(var(--oas-lime))" }}
+            >
                 {title.toUpperCase()}
             </div>
             <ul className="space-y-2.5">

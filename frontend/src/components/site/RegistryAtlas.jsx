@@ -1,21 +1,22 @@
-import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Section, { SectionHeader } from "@/components/site/Section";
-import { REGISTRIES } from "@/data/architecture";
+import { REGISTRY_FAMILIES } from "@/data/architecture";
 
-export default function RegistryAtlas() {
-    const [selected, setSelected] = useState("plot");
-    const active = useMemo(
-        () => REGISTRIES.find((r) => r.id === selected) || REGISTRIES[0],
-        [selected]
-    );
-    const connectedIds = useMemo(() => new Set(active.connects), [active]);
+/**
+ * Core Registries — three canonical families, each an expandable module.
+ * No diagram in this section per Design Review Round 1.
+ * The three tabs behave like a tab selector: only one open at a time on
+ * desktop; on mobile, each is an accordion.
+ */
+export default function CoreRegistries() {
+    const [openId, setOpenId] = useState("identity");
 
     return (
         <section
             id="registries"
             data-testid="section-registries"
-            className="relative py-24 lg:py-32 oas-section-sunken"
+            className="relative py-24 lg:py-32 oas-band-strong"
         >
             <Section>
                 <SectionHeader
@@ -24,202 +25,180 @@ export default function RegistryAtlas() {
                     description="Registries provide the trusted foundation for interoperability within Open Agri Stack. Each registry is designed as a reusable, standards-based building block that can integrate with compliant implementations."
                 />
 
-                <div className="mt-14 lg:mt-20 grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-start">
-                    <div className="oas-card p-4 lg:p-6 relative">
-                        <div className="flex items-center justify-between px-2 mb-2">
-                            <span className="mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft">
-                                REGISTRY GRAPH
-                            </span>
-                            <span className="oas-chip !text-[10px]">6 NODES</span>
-                        </div>
-                        <div className="relative aspect-square oas-dot-bg rounded-[10px] overflow-hidden">
-                            <AtlasGraph
-                                selectedId={selected}
-                                connectedIds={connectedIds}
-                                onSelect={setSelected}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col gap-4">
-                        <motion.div
-                            key={active.id}
-                            initial={{ opacity: 0, y: 8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.35 }}
-                            className="oas-card p-7 lg:p-8"
-                            data-testid={`registry-detail-${active.id}`}
+                {/* Tabs — desktop */}
+                <div
+                    className="hidden lg:flex mt-14 lg:mt-20 items-stretch gap-2 p-1.5 rounded-full oas-card w-fit"
+                    role="tablist"
+                >
+                    {REGISTRY_FAMILIES.map((f) => (
+                        <button
+                            key={f.id}
+                            role="tab"
+                            aria-selected={openId === f.id}
+                            data-testid={`registry-tab-${f.id}`}
+                            onClick={() => setOpenId(f.id)}
+                            className={`relative px-5 py-2.5 rounded-full text-[13.5px] font-medium transition-colors ${
+                                openId === f.id
+                                    ? "text-oas-bg"
+                                    : "text-oas-ink hover:text-oas-forest"
+                            }`}
                         >
-                            <div className="flex items-center gap-3">
-                                <span className="oas-chip !text-[10px]">{active.kind}</span>
-                                <span className="mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft">
-                                    REGISTRY
-                                </span>
-                            </div>
-                            <h3 className="mt-3 font-serif-display text-[38px] leading-[1.02] text-oas-ink">
-                                {active.title}
-                            </h3>
-                            <p className="mt-3 text-[15.5px] leading-[1.6] text-oas-ink-soft">
-                                {active.purpose}
-                            </p>
+                            {openId === f.id && (
+                                <motion.span
+                                    layoutId="registry-tab-pill"
+                                    className="absolute inset-0 rounded-full -z-0"
+                                    style={{
+                                        background: "hsl(var(--oas-forest))",
+                                    }}
+                                    transition={{ type: "spring", stiffness: 320, damping: 32 }}
+                                />
+                            )}
+                            <span className="relative z-10">{f.title}</span>
+                        </button>
+                    ))}
+                </div>
 
-                            <div className="mt-7 grid sm:grid-cols-2 gap-6">
-                                <div>
-                                    <div className="mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft mb-3">
-                                        COMPONENTS
-                                    </div>
-                                    <ul className="space-y-2">
-                                        {active.components.map((c) => (
-                                            <li
-                                                key={c}
-                                                className="text-[14px] text-oas-ink flex items-center gap-2"
-                                            >
-                                                <span className="w-1 h-1 rounded-full bg-oas-ink" />
-                                                {c}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <div>
-                                    <div className="mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft mb-3">
-                                        CONNECTS TO
-                                    </div>
-                                    <div className="flex flex-wrap gap-1.5">
-                                        {active.connects.map((id) => {
-                                            const r = REGISTRIES.find((x) => x.id === id);
-                                            return (
-                                                <button
-                                                    key={id}
-                                                    onClick={() => setSelected(id)}
-                                                    data-testid={`connect-${id}`}
-                                                    className="oas-chip hover:border-oas-ink transition-colors"
-                                                >
-                                                    ↳ {r?.title || id}
-                                                </button>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
+                {/* Desktop tab content */}
+                <div className="hidden lg:block mt-8">
+                    <AnimatePresence mode="wait">
+                        {REGISTRY_FAMILIES.filter((f) => f.id === openId).map((f) => (
+                            <FamilyPanel key={f.id} family={f} />
+                        ))}
+                    </AnimatePresence>
+                </div>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                            {REGISTRIES.map((r) => (
-                                <button
-                                    key={r.id}
-                                    data-testid={`registry-pill-${r.id}`}
-                                    onClick={() => setSelected(r.id)}
-                                    className={`text-left rounded-[10px] border px-3 py-3 transition-colors ${
-                                        selected === r.id
-                                            ? "border-oas-ink bg-oas-surface"
-                                            : "border-oas-border bg-oas-bg/60 hover:border-oas-ink/40"
-                                    }`}
-                                >
-                                    <div className="mono text-[10px] text-oas-ink-soft">
-                                        {r.kind}
-                                    </div>
-                                    <div className="text-[13.5px] text-oas-ink mt-1">
-                                        {r.title}
-                                    </div>
-                                </button>
-                            ))}
-                        </div>
-                    </div>
+                {/* Mobile: stacked accordions */}
+                <div className="lg:hidden mt-12 flex flex-col gap-3">
+                    {REGISTRY_FAMILIES.map((f) => (
+                        <MobileAccordion
+                            key={f.id}
+                            family={f}
+                            isOpen={openId === f.id}
+                            onToggle={() =>
+                                setOpenId((cur) => (cur === f.id ? null : f.id))
+                            }
+                        />
+                    ))}
                 </div>
             </Section>
         </section>
     );
 }
 
-function AtlasGraph({ selectedId, connectedIds, onSelect }) {
-    const positions = {
-        farmer: { x: 50, y: 20 },
-        plot: { x: 80, y: 40 },
-        crop: { x: 80, y: 72 },
-        advisory: { x: 50, y: 88 },
-        trade: { x: 20, y: 72 },
-        credit: { x: 20, y: 40 },
-    };
-    const selectedPos = positions[selectedId];
-
+function FamilyPanel({ family }) {
     return (
-        <svg
-            viewBox="0 0 100 100"
-            className="absolute inset-0 w-full h-full"
-            preserveAspectRatio="xMidYMid meet"
+        <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+            className="oas-card p-8 lg:p-10"
+            data-testid={`registry-panel-${family.id}`}
         >
-            {REGISTRIES.map((r) =>
-                r.connects.map((cid) => {
-                    const a = positions[r.id];
-                    const b = positions[cid];
-                    if (!a || !b) return null;
-                    const isActive = r.id === selectedId || cid === selectedId;
-                    return (
-                        <line
-                            key={`${r.id}-${cid}`}
-                            x1={a.x}
-                            y1={a.y}
-                            x2={b.x}
-                            y2={b.y}
-                            stroke={
-                                isActive
-                                    ? "hsl(var(--oas-accent-ink))"
-                                    : "hsl(var(--oas-ink))"
-                            }
-                            strokeOpacity={isActive ? 0.7 : 0.14}
-                            strokeWidth={isActive ? 0.4 : 0.25}
-                        />
-                    );
-                })
-            )}
-            {REGISTRIES.map((r) => {
-                const p = positions[r.id];
-                const isSelected = r.id === selectedId;
-                const isConnected = connectedIds.has(r.id);
-                const dim = !isSelected && !isConnected;
-                return (
-                    <g
-                        key={r.id}
-                        transform={`translate(${p.x}, ${p.y})`}
-                        onClick={() => onSelect(r.id)}
-                        style={{ cursor: "pointer" }}
-                        opacity={dim ? 0.45 : 1}
-                    >
-                        <circle
-                            r={isSelected ? 5 : 4}
-                            fill={isSelected ? "hsl(var(--oas-accent))" : "hsl(var(--oas-surface))"}
-                            stroke={isSelected ? "hsl(var(--oas-ink))" : "hsl(var(--oas-border))"}
-                            strokeWidth="0.4"
-                        />
-                        <text
-                            y="10"
-                            textAnchor="middle"
-                            fontSize="2.4"
-                            fontFamily="Inter Tight, sans-serif"
-                            fill="hsl(var(--oas-ink))"
-                            fontWeight={isSelected ? 600 : 500}
-                        >
-                            {r.title
-                                .replace(" Registry", "")
-                                .replace(" Catalogue", "")
-                                .replace(" Ledger", "")}
-                        </text>
-                    </g>
-                );
-            })}
-            {selectedPos && (
-                <motion.circle
-                    initial={false}
-                    animate={{ cx: selectedPos.x, cy: selectedPos.y }}
-                    transition={{ type: "spring", stiffness: 220, damping: 22 }}
-                    r="7"
-                    fill="none"
-                    stroke="hsl(var(--oas-accent))"
-                    strokeOpacity="0.45"
-                    strokeWidth="0.4"
-                    strokeDasharray="1.4 1.2"
-                />
-            )}
-        </svg>
+            <div className="grid lg:grid-cols-[1fr_1.6fr] gap-8 lg:gap-14 items-start">
+                <div>
+                    <div className="oas-eyebrow oas-eyebrow-accent mb-4">
+                        Registry family
+                    </div>
+                    <h3 className="font-serif-display text-[36px] lg:text-[44px] leading-[1.02] text-oas-ink">
+                        {family.title}
+                    </h3>
+                    <p className="mt-4 text-[15.5px] leading-[1.65] text-oas-ink-soft max-w-[420px]">
+                        {family.blurb}
+                    </p>
+                    <div className="mt-6 mono text-[10.5px] tracking-[0.16em] text-oas-forest-soft">
+                        {String(family.items.length).padStart(2, "0")} REGISTRIES
+                    </div>
+                </div>
+
+                <div>
+                    <ItemGrid items={family.items} familyId={family.id} />
+                </div>
+            </div>
+        </motion.div>
     );
+}
+
+function ItemGrid({ items, familyId }) {
+    return (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
+            {items.map((label, i) => (
+                <motion.div
+                    key={label}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: i * 0.03 }}
+                    data-testid={`registry-item-${familyId}-${slug(label)}`}
+                    className="group relative rounded-[10px] border border-oas-border bg-oas-surface px-4 py-3.5 hover:border-oas-forest/50 hover:bg-oas-lime-tint transition-colors cursor-default"
+                >
+                    <div className="flex items-center gap-2 mb-1.5">
+                        <span
+                            className="w-1.5 h-1.5 rounded-full"
+                            style={{ background: "hsl(var(--oas-lime))" }}
+                        />
+                        <span className="mono text-[9.5px] tracking-[0.16em] text-oas-forest-soft">
+                            {String(i + 1).padStart(2, "0")}
+                        </span>
+                    </div>
+                    <div className="text-[14px] text-oas-ink leading-snug">
+                        {label}
+                    </div>
+                </motion.div>
+            ))}
+        </div>
+    );
+}
+
+function MobileAccordion({ family, isOpen, onToggle }) {
+    return (
+        <div
+            className="oas-card overflow-hidden"
+            data-testid={`registry-mobile-${family.id}`}
+        >
+            <button
+                onClick={onToggle}
+                className="w-full flex items-center justify-between p-5 text-left"
+                aria-expanded={isOpen}
+            >
+                <div>
+                    <div className="oas-eyebrow oas-eyebrow-accent mb-1.5">
+                        {String(family.items.length).padStart(2, "0")} registries
+                    </div>
+                    <h3 className="font-serif-display text-[24px] leading-none text-oas-ink">
+                        {family.title}
+                    </h3>
+                </div>
+                <motion.span
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    className="w-8 h-8 rounded-full border border-oas-border grid place-items-center"
+                >
+                    <svg width="12" height="12" viewBox="0 0 12 12">
+                        <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.4" />
+                    </svg>
+                </motion.span>
+            </button>
+            <AnimatePresence initial={false}>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="p-5 pt-0">
+                            <p className="text-[14px] leading-[1.6] text-oas-ink-soft mb-4">
+                                {family.blurb}
+                            </p>
+                            <ItemGrid items={family.items} familyId={family.id} />
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+}
+
+function slug(s) {
+    return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
