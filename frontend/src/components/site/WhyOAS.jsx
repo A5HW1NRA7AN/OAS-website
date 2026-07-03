@@ -8,14 +8,8 @@ export default function WhyOAS() {
             <Section>
                 <SectionHeader
                     eyebrow="01 · Why Open Agri Stack"
-                    title={
-                        <>
-                            Agriculture cannot be
-                            <span className="italic text-oas-ink-soft"> rebuilt </span>
-                            for every program.
-                        </>
-                    }
-                    description="OAS is the shared substrate — an open, modular architecture that lets institutions and builders compose applications from the same public building blocks."
+                    title={<>Why Open Agri Stack?</>}
+                    description="Open Agri Stack provides a shared digital foundation for agriculture by combining foundational Digital Public Infrastructure with agriculture-specific building blocks. Instead of building isolated systems from scratch, organizations can compose interoperable services using reusable components, open standards, and common registries."
                 />
 
                 <div className="mt-14 lg:mt-20 grid md:grid-cols-3 gap-4 lg:gap-5">

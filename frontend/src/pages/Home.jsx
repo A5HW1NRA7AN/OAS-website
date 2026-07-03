@@ -40,34 +40,34 @@ export default function Home() {
 
             <ChapterTransition
                 from="01 · Why"
-                to="02 · Architecture"
-                note="From principles → to the reference architecture that expresses them."
+                to="02 · Reference Architecture"
+                note="From principles → to the three-layer reference architecture."
             />
             <ReferenceArchitecture />
 
             <ChapterTransition
-                from="02 · Architecture"
-                to="03 · Stack"
-                note="From layers → to the specific technical stack that powers each layer."
+                from="02 · Reference Architecture"
+                to="03 · Explore the Stack"
+                note="From layers → to the specific implementation of each layer."
             />
             <StackExplorer />
 
             <ChapterTransition
-                from="03 · Stack"
-                to="04 · Registries"
-                note="From layers → to the registries themselves as reusable modules."
+                from="03 · Explore the Stack"
+                to="04 · Core Registries"
+                note="From the stack → to the registries that make it real."
             />
             <RegistryAtlas />
 
             <ChapterTransition
-                from="04 · Registries"
-                to="05 · Build"
+                from="04 · Core Registries"
+                to="05 · Composable Applications"
                 note="From what exists → to how you assemble it into applications."
             />
             <BuildWithOAS />
 
             <ChapterTransition
-                from="05 · Build"
+                from="05 · Composable Applications"
                 to="06 · Resources"
                 note="From understanding → to shipping in the open."
             />

@@ -35,13 +35,11 @@ export default function Hero() {
                             transition={{ duration: 0.7, delay: 0.05 }}
                             className="font-serif-display text-[46px] sm:text-[58px] lg:text-[72px] leading-[0.98] tracking-[-0.02em] text-oas-ink"
                         >
-                            The open, composable{" "}
-                            <span className="italic text-oas-ink-soft">
-                                stack
-                            </span>{" "}
-                            for the digital agriculture{" "}
+                            Building the Digital{" "}
+                            <span className="italic text-oas-ink-soft">Public</span>{" "}
+                            Infrastructure for{" "}
                             <span className="relative inline-block">
-                                <span className="relative z-10">era.</span>
+                                <span className="relative z-10">Agriculture.</span>
                                 <span className="absolute inset-x-0 bottom-1 h-[10px] bg-oas-accent/40 -z-0 rounded-sm" />
                             </span>
                         </motion.h1>
@@ -52,10 +50,12 @@ export default function Hero() {
                             transition={{ duration: 0.7, delay: 0.15 }}
                             className="mt-6 text-[17px] lg:text-[19px] leading-[1.55] text-oas-ink-soft max-w-[560px]"
                         >
-                            Open Agri Stack is public digital infrastructure for
-                            agriculture — a layered set of registries, catalogues
-                            and protocols that lets governments, institutions and
-                            builders assemble applications instead of rebuilding them.
+                            Open Agri Stack (OAS) is an open, modular Digital Public
+                            Infrastructure (DPI) initiative that provides interoperable
+                            building blocks for agriculture. It enables governments,
+                            ecosystem partners, and developers to build scalable
+                            digital agricultural services on a shared,
+                            standards-based foundation.
                         </motion.p>
 
                         <motion.div
@@ -69,7 +69,7 @@ export default function Hero() {
                                 data-testid="hero-cta-architecture"
                                 className="inline-flex items-center gap-2 rounded-full bg-oas-ink text-oas-bg px-5 py-3 text-[14px] font-medium hover:bg-oas-ink-soft transition-colors"
                             >
-                                Explore the architecture
+                                Explore the Architecture
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                                     <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
@@ -79,7 +79,7 @@ export default function Hero() {
                                 data-testid="hero-cta-docs"
                                 className="inline-flex items-center gap-2 rounded-full border border-oas-border bg-oas-surface text-oas-ink px-5 py-3 text-[14px] font-medium hover:bg-oas-section transition-colors"
                             >
-                                View documentation ↗
+                                View Documentation ↗
                             </a>
                         </motion.div>
 
@@ -92,7 +92,7 @@ export default function Hero() {
                             {[
                                 ["L1", "Foundational DPI"],
                                 ["L2", "Agri Building Blocks"],
-                                ["L3", "Applications"],
+                                ["L3", "Applications & Services"],
                             ].map(([code, label]) => (
                                 <div key={code} className="border-t border-oas-border pt-3">
                                     <div className="mono text-[10.5px] tracking-[0.14em] text-oas-ink-soft">

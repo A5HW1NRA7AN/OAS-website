@@ -20,14 +20,8 @@ export default function RegistryAtlas() {
             <Section>
                 <SectionHeader
                     eyebrow="04 · Registry Atlas"
-                    title={
-                        <>
-                            Registries as
-                            <span className="italic text-oas-ink-soft"> reusable </span>
-                            modules.
-                        </>
-                    }
-                    description="Every registry is a self-contained module with a defined purpose, components, and relationships. Selecting one reveals how it connects to the rest of the atlas."
+                    title={<>Core Registries.</>}
+                    description="Registries provide the trusted foundation for interoperability within Open Agri Stack. Each registry is designed as a reusable, standards-based building block that can integrate with compliant implementations."
                 />
 
                 <div className="mt-14 lg:mt-20 grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-start">

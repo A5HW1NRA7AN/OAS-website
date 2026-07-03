@@ -5,16 +5,16 @@ const RESOURCES = [
     {
         id: "gitbook",
         eyebrow: "DOCUMENTATION",
-        title: "GitBook",
-        body: "Specifications, architecture references, integration guides and the full narrative of Open Agri Stack.",
-        cta: "Read the docs",
+        title: "Documentation",
+        body: "Explore technical documentation, implementation guidance, and architecture references.",
+        cta: "Read the documentation",
         href: "#",
     },
     {
         id: "github",
         eyebrow: "SOURCE",
         title: "GitHub",
-        body: "Open source reference implementations, schemas, SDKs, and the open governance for every building block.",
+        body: "Browse the source code, contribute to the project, and explore the open-source ecosystem.",
         cta: "Browse the repositories",
         href: "#",
     },
@@ -30,8 +30,8 @@ export default function Resources() {
             <Section>
                 <SectionHeader
                     eyebrow="06 · Resources"
-                    title={<>Continue building.</>}
-                    description="Everything from specifications to reference code lives in the open. Pick the door that suits how you learn best."
+                    title={<>Continue Exploring.</>}
+                    description="Open Agri Stack is developed in the open. Explore the documentation, architecture, implementation guidance, and source code."
                 />
 
                 <div className="mt-14 lg:mt-20 grid md:grid-cols-2 gap-5">

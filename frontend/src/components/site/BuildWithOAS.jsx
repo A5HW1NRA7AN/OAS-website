@@ -26,9 +26,9 @@ export default function BuildWithOAS() {
         <section id="build" data-testid="section-build" className="relative py-24 lg:py-32">
             <Section>
                 <SectionHeader
-                    eyebrow="05 · Build with OAS"
-                    title={<>Compose applications, don&rsquo;t rebuild them.</>}
-                    description="Pick the building blocks you have. The stack will surface the applications you can already assemble — and what's still missing."
+                    eyebrow="05 · Build with Open Agri Stack"
+                    title={<>Composable Applications.</>}
+                    description="Applications are created by combining reusable infrastructure rather than building isolated systems. Open Agri Stack enables organizations to assemble solutions using interoperable building blocks."
                 />
 
                 <div className="mt-14 lg:mt-20 grid lg:grid-cols-[1fr_1.15fr] gap-10 lg:gap-14 items-start">

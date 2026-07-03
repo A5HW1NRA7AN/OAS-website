@@ -46,8 +46,10 @@ export default function Footer() {
                             </span>
                         </div>
                         <p className="mt-5 max-w-[380px] text-[14.5px] leading-[1.6] text-oas-bg/70">
-                            An open, layered architecture for the digital agriculture
-                            era. Part of the OpenAgriNet ecosystem.
+                            Open Agri Stack is an open Digital Public Infrastructure
+                            initiative that enables interoperable agricultural
+                            ecosystems through reusable building blocks, shared
+                            standards, and open collaboration.
                         </p>
                         <p className="mt-8 mono text-[10.5px] tracking-[0.14em] text-oas-bg/50">
                             REVEAL THE STACK · BUILD UNDERSTANDING
@@ -55,21 +57,20 @@ export default function Footer() {
                     </div>
 
                     <FooterCol
-                        title="Learn"
+                        title="Explore"
                         links={[
-                            { label: "Why OAS", href: "#why" },
-                            { label: "Architecture", href: "#architecture" },
-                            { label: "Stack", href: "#stack" },
-                            { label: "Registries", href: "#registries" },
+                            { label: "Overview", href: "#hero" },
+                            { label: "Reference Architecture", href: "#architecture" },
+                            { label: "Explore the Stack", href: "#stack" },
+                            { label: "Core Registries", href: "#registries" },
                         ]}
                     />
                     <FooterCol
                         title="Build"
                         links={[
-                            { label: "Compose", href: "#build" },
-                            { label: "GitBook", href: "#" },
+                            { label: "Composable Applications", href: "#build" },
+                            { label: "Documentation", href: "#" },
                             { label: "GitHub", href: "#" },
-                            { label: "Schemas", href: "#" },
                         ]}
                     />
                     <FooterCol
@@ -85,7 +86,7 @@ export default function Footer() {
 
                 <div className="mt-16 pt-6 border-t border-oas-bg/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div className="mono text-[10.5px] tracking-[0.14em] text-oas-bg/50">
-                        © {new Date().getFullYear()} · OPEN AGRI STACK · v1.0
+                        © OPEN AGRI STACK 2026
                     </div>
                     <div className="flex items-center gap-5 text-[13px] text-oas-bg/70">
                         <a href="#" className="hover:text-oas-bg">

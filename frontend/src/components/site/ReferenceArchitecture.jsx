@@ -14,14 +14,8 @@ export default function ReferenceArchitecture() {
             <Section>
                 <SectionHeader
                     eyebrow="02 · Reference Architecture"
-                    title={
-                        <>
-                            Three layers.
-                            <br />
-                            One <span className="italic text-oas-ink-soft">shared</span> foundation.
-                        </>
-                    }
-                    description="Applications sit on top of open agriculture building blocks, which in turn sit on top of country-level digital public infrastructure. Hover a layer to explore what lives inside."
+                    title={<>Reference Architecture</>}
+                    description="The Open Agri Stack Reference Architecture is organized into three interoperable layers. Each layer builds upon the one below it, creating a modular foundation for digital agriculture applications."
                 />
 
                 <div className="mt-14 lg:mt-20 grid lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-14 items-start">

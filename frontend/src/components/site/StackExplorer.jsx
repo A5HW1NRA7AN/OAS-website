@@ -10,9 +10,9 @@ export default function StackExplorer() {
         <section id="stack" data-testid="section-stack" className="relative py-24 lg:py-32">
             <Section>
                 <SectionHeader
-                    eyebrow="03 · OAS Stack"
-                    title={<>The stack, layer by layer.</>}
-                    description="Six precisely-scoped layers, each with a single job. Click a layer to expand its modules and see how the stack composes upward."
+                    eyebrow="03 · The Open Agri Stack"
+                    title={<>Explore the Stack.</>}
+                    description="The Open Agri Stack implementation organizes core infrastructure into reusable layers that work together through secure interfaces, shared registries, and standardized data exchange."
                 />
 
                 <div className="mt-14 lg:mt-20 grid lg:grid-cols-[1fr_1.15fr] gap-10 lg:gap-14 items-start">

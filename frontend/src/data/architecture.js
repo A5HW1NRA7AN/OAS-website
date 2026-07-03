@@ -1,5 +1,5 @@
 /**
- * Open Agri Stack — architecture data.
+ * Open Agri Stack — architecture data (brand-approved copy).
  * Chapter-numbered so the entire site reads as a continuous narrative.
  */
 
@@ -9,7 +9,7 @@ export const NAV_SECTIONS = [
     { id: "architecture", label: "Architecture", chapter: "02" },
     { id: "stack", label: "Stack", chapter: "03" },
     { id: "registries", label: "Registries", chapter: "04" },
-    { id: "build", label: "Build", chapter: "05" },
+    { id: "build", label: "Applications", chapter: "05" },
     { id: "resources", label: "Resources", chapter: "06" },
 ];
 
@@ -17,18 +17,17 @@ export const REFERENCE_LAYERS = [
     {
         id: "applications",
         code: "L3",
-        title: "Applications",
+        title: "Applications & Services",
         summary:
-            "Farmer-facing and institutional applications composed from open building blocks.",
+            "Composable applications including Digital Agri-Finance, Farmer Profiles, Market Discovery, Traceability, and AI-enabled Advisory Services built on reusable infrastructure.",
         detail:
-            "Applications such as advisory, credit, insurance, market linkages and traceability are assembled — not rebuilt — by combining reusable OAS components.",
+            "Applications are assembled from the same open building blocks — enabling faster implementation, consistent interoperability, and long-term sustainability across programs and geographies.",
         modules: [
-            "AI Advisory",
-            "Digital Credit",
-            "Insurance",
-            "Market Linkages",
+            "Digital Agri-Finance",
+            "Farmer Profiles",
+            "Market Discovery",
             "Traceability",
-            "Extension Services",
+            "AI Advisory Services",
         ],
     },
     {
@@ -36,32 +35,34 @@ export const REFERENCE_LAYERS = [
         code: "L2",
         title: "Agriculture Building Blocks",
         summary:
-            "Sector-specific composable primitives — the shared vocabulary of digital agriculture.",
+            "Agriculture-specific registries, standards, terminology services, agricultural data platforms, and AI assets that provide reusable capabilities for agricultural applications.",
         detail:
-            "Registries, catalogues, and protocols that encode the shared semantics of agriculture: farmers, plots, crops, produce, transactions, and consent.",
+            "The shared semantics of digital agriculture: registries, catalogues, terminology services, and agricultural data & AI assets that every downstream application can rely on.",
         modules: [
-            "Farmer Registry",
-            "Plot Registry",
-            "Crop Catalogue",
-            "Produce Catalogue",
-            "Transaction Ledger",
-            "Advisory Catalogue",
+            "Agri Identity Registry",
+            "Transactional Registries",
+            "Catalogues",
+            "Terminology Services",
+            "Agri Data Platforms",
+            "AI Assets",
         ],
     },
     {
         id: "foundational",
         code: "L1",
-        title: "Foundational DPI",
+        title: "Foundational Digital Public Infrastructure",
         summary:
-            "Country-level digital public infrastructure — identity, consent, exchange, and discovery.",
+            "Shared cross-sector capabilities including digital identity, payments, trust frameworks, data exchange, discovery, foundational data services, and language localization.",
         detail:
-            "The base layer inherited from the wider DPI ecosystem: verifiable identity, consent, secure data exchange, and open discovery protocols.",
+            "The cross-sector DPI substrate — verifiable identity, payments, trust frameworks, secure data exchange, discovery, and language localization — inherited from the wider DPI ecosystem.",
         modules: [
             "Digital Identity",
-            "Consent Framework",
+            "Payments",
+            "Trust Frameworks",
             "Data Exchange",
-            "Discovery (UASI)",
-            "Payments Rails",
+            "Discovery",
+            "Foundational Data",
+            "Localization",
         ],
     },
 ];
@@ -73,92 +74,90 @@ export const STACK_LAYERS = [
         title: "UASI",
         subtitle: "Unified Agriculture Service Interface",
         detail:
-            "The discovery and interaction protocol — a common surface across networks, agents, and applications.",
-        modules: ["Discovery", "Search", "Fulfillment", "Post-Fulfillment"],
+            "Provides the unified interface through which applications discover and securely access agricultural services.",
+        modules: ["Discovery", "Access", "Secure Interfaces", "Service Contracts"],
     },
     {
         id: "consent",
         code: "S5",
-        title: "Consent",
-        subtitle: "Purpose-bound, revocable data sharing",
+        title: "Consent Framework",
+        subtitle: "Trusted, transparent, consent-driven data sharing",
         detail:
-            "Every data movement is anchored in an auditable, revocable consent artefact — the citizen remains in control.",
-        modules: ["Consent Artefacts", "Purpose Registry", "Audit Ledger"],
+            "Ensures trusted, transparent, and consent-driven data sharing across the ecosystem — every data movement is anchored in an auditable, revocable consent artefact.",
+        modules: ["Consent Artefacts", "Purpose Binding", "Revocation", "Audit"],
     },
     {
         id: "identity",
         code: "S4",
-        title: "Identity Registries",
-        subtitle: "Who is participating",
+        title: "Agri Identity Registry",
+        subtitle: "Trusted identities across the ecosystem",
         detail:
-            "Verifiable, federated identity for farmers, FPOs, buyers, advisors, and institutions.",
+            "Maintains trusted identities for farmers, extension agents, producer organizations, market participants, and other agricultural stakeholders.",
         modules: [
-            "Farmer Registry",
-            "FPO Registry",
-            "Advisor Registry",
-            "Buyer Registry",
+            "Farmer Identity",
+            "Extension Agents",
+            "Producer Organizations",
+            "Market Participants",
         ],
     },
     {
         id: "catalogues",
         code: "S3",
         title: "Catalogues",
-        subtitle: "What is being described",
+        subtitle: "Standardized agricultural reference data",
         detail:
-            "Open, machine-readable vocabularies for crops, produce, practices, advisories and services.",
+            "Provides standardized agricultural reference data including crops, livestock, inputs, locations, seasons, schemes, soil, and related catalogues.",
         modules: [
-            "Crop Catalogue",
-            "Produce Catalogue",
-            "Practice Catalogue",
-            "Advisory Catalogue",
+            "Crops",
+            "Livestock",
+            "Inputs",
+            "Locations",
+            "Seasons",
+            "Schemes",
+            "Soil",
         ],
     },
     {
         id: "transactional",
         code: "S2",
         title: "Transactional Registries",
-        subtitle: "What is happening",
+        subtitle: "Operational agricultural records",
         detail:
-            "Auditable records of sowing, harvest, sale, credit disbursement, and quality events.",
-        modules: [
-            "Sowing Ledger",
-            "Harvest Ledger",
-            "Trade Ledger",
-            "Quality Events",
-        ],
+            "Captures operational agricultural records such as crop sown, plot ownership, and livestock holdings — the ground-truth of what is actually happening on the farm.",
+        modules: ["Crop Sown", "Plot Ownership", "Livestock Holdings", "Events"],
     },
     {
         id: "foundational",
         code: "S1",
         title: "Foundational Registries",
-        subtitle: "What exists in the physical world",
+        subtitle: "Foundational digital infrastructure",
         detail:
-            "Land, plots, water bodies, and infrastructure — the geospatial ground truth for every downstream service.",
-        modules: [
-            "Plot Registry",
-            "Land Records",
-            "Water Registry",
-            "Infrastructure",
-        ],
+            "Integrates foundational digital infrastructure including national identity systems and payment ecosystems — the sovereign DPI on which agriculture builds.",
+        modules: ["National Identity", "Payment Ecosystems", "Trust Anchors"],
     },
 ];
 
+/**
+ * Registries surfaced in the atlas. The site's brand copy speaks about two
+ * families — Identity and Transactional — plus Catalogues. Each concrete
+ * registry below is a reusable, standards-based building block.
+ */
 export const REGISTRIES = [
     {
         id: "farmer",
         title: "Farmer Registry",
         kind: "Identity",
         purpose:
-            "Verifiable, consented, portable digital identity for farmers across programs and geographies.",
-        components: ["Unique ID", "Household", "Roles", "Consent History"],
+            "Trusted, portable digital identity for farmers — designed as a pluggable interface that connects with existing identity solutions while maintaining interoperability.",
+        components: ["Farmer Identity", "Household", "Roles", "Consent History"],
         connects: ["plot", "trade", "credit"],
     },
     {
         id: "plot",
-        title: "Plot Registry",
-        kind: "Foundational",
+        title: "Plot Ownership Registry",
+        kind: "Transactional",
         purpose:
-            "Geospatial ground truth for cultivable land — parcels, boundaries, ownership and use.",
+            "Operational record of cultivable land — parcels, boundaries, tenure and use — captured using common specifications for consistent implementation.",
         components: ["Geometry", "Tenure", "Soil", "Water Access"],
         connects: ["farmer", "crop", "advisory"],
     },
@@ -167,7 +166,7 @@ export const REGISTRIES = [
         title: "Crop Catalogue",
         kind: "Catalogue",
         purpose:
-            "Shared, open vocabulary for crops, varieties, and cultivation calendars.",
+            "Standardized agricultural reference data for crops, varieties, and cultivation calendars — a shared, open vocabulary.",
         components: ["Taxonomy", "Varieties", "Calendars", "Practices"],
         connects: ["plot", "advisory", "trade"],
     },
@@ -176,25 +175,25 @@ export const REGISTRIES = [
         title: "Advisory Catalogue",
         kind: "Catalogue",
         purpose:
-            "Interoperable advisory content — agronomy, weather, pest, market — with source and confidence.",
+            "Interoperable advisory content — agronomy, weather, pest, market — with source, confidence and language attribution.",
         components: ["Providers", "Content", "Confidence", "Language"],
         connects: ["farmer", "crop", "plot"],
     },
     {
         id: "trade",
-        title: "Trade Ledger",
+        title: "Trade Registry",
         kind: "Transactional",
         purpose:
-            "Auditable transactions between farmers, aggregators and buyers, with quality events attached.",
+            "Operational records of transactions between farmers, aggregators and buyers — captured using common specifications with quality events attached.",
         components: ["Orders", "Fulfillment", "Quality", "Settlement"],
         connects: ["farmer", "crop", "credit"],
     },
     {
         id: "credit",
-        title: "Credit Registry",
+        title: "Agri-Finance Registry",
         kind: "Transactional",
         purpose:
-            "Farm-aware credit rails — disbursements, repayments and outcomes tied to real productive activity.",
+            "Farm-aware finance rails — disbursements, repayments and outcomes tied to verifiable productive activity.",
         components: ["Underwriting Signals", "Disbursements", "Repayments"],
         connects: ["farmer", "trade"],
     },
@@ -202,21 +201,21 @@ export const REGISTRIES = [
 
 export const APPLICATIONS = [
     {
-        id: "advisory",
-        title: "AI Advisory",
-        blurb: "Hyper-local, source-attributed advisory delivered through farmer-preferred channels.",
-        needs: ["farmer", "plot", "crop", "advisory"],
-    },
-    {
-        id: "credit",
-        title: "Digital Credit",
-        blurb: "Production-linked credit underwritten from verifiable farm and transaction signals.",
+        id: "finance",
+        title: "Digital Agri-Finance",
+        blurb: "Production-linked credit and insurance underwritten from verifiable farm and transaction signals.",
         needs: ["farmer", "plot", "trade", "credit"],
     },
     {
+        id: "profiles",
+        title: "Farmer Profiles",
+        blurb: "Portable, consented farmer profiles that follow the farmer across every program and service.",
+        needs: ["farmer", "plot"],
+    },
+    {
         id: "market",
-        title: "Market Linkages",
-        blurb: "Open discovery between growers and buyers with consented data and quality proofs.",
+        title: "Market Discovery & Linkages",
+        blurb: "Open discovery between growers and buyers with consented data and standardized quality proofs.",
         needs: ["farmer", "crop", "trade"],
     },
     {
@@ -225,22 +224,28 @@ export const APPLICATIONS = [
         blurb: "Farm-to-shelf provenance built from open registries — not proprietary silos.",
         needs: ["plot", "crop", "trade"],
     },
+    {
+        id: "advisory",
+        title: "AI-enabled Advisory Services",
+        blurb: "Hyper-local, source-attributed advisory delivered through farmer-preferred channels.",
+        needs: ["farmer", "plot", "crop", "advisory"],
+    },
 ];
 
 export const WHY_PILLARS = [
     {
         id: "open",
         title: "Open by Design",
-        body: "Open specifications, open source reference implementations, open governance. Nothing about agriculture is proprietary here.",
+        body: "Built on open standards, reusable building blocks, and interoperable interfaces to encourage collaboration across governments, organizations, and technology providers.",
     },
     {
         id: "modular",
         title: "Modular Architecture",
-        body: "Every capability is a composable building block — reusable, replaceable, independently governed.",
+        body: "Applications are assembled from reusable infrastructure rather than developed as isolated systems, enabling faster implementation and long-term sustainability.",
     },
     {
         id: "dpi",
         title: "Digital Public Infrastructure",
-        body: "Built as public digital infrastructure — inclusive by default, safe by design, extensible for every context.",
+        body: "Combines foundational DPI with agriculture-specific components to enable trusted, scalable, and interoperable digital agriculture ecosystems.",
     },
 ];
