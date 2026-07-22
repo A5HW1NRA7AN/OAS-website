@@ -11,7 +11,6 @@ import BlueprintBackground from "@/components/site/BlueprintBackground";
 
 /**
  * The site is one continuous scroll-driven narrative.
- * Chapters (00–06) form the information architecture.
  * The living blueprint background sits behind every section.
  */
 export default function Home() {

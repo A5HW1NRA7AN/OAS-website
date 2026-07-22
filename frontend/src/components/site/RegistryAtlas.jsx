@@ -20,7 +20,7 @@ export default function CoreRegistries() {
         >
             <Section>
                 <SectionHeader
-                    eyebrow="04 · Registry Atlas"
+                    eyebrow="Registry Atlas"
                     title={<>Core Registries.</>}
                     description="Registries provide the trusted foundation for interoperability within Open Agri Stack. Each registry is designed as a reusable, standards-based building block that can integrate with compliant implementations."
                 />
@@ -136,9 +136,6 @@ function ItemGrid({ items, familyId }) {
                             className="w-1.5 h-1.5 rounded-full"
                             style={{ background: "hsl(var(--oas-lime))" }}
                         />
-                        <span className="mono text-[9.5px] tracking-[0.16em] text-oas-forest-soft">
-                            {String(i + 1).padStart(2, "0")}
-                        </span>
                     </div>
                     <div className="text-[14px] text-oas-ink leading-snug">
                         {label}

@@ -23,15 +23,8 @@ export default function Hero() {
                             transition={{ duration: 0.6 }}
                             className="flex items-center gap-3 mb-8"
                         >
-                            <span className="oas-chip oas-chip-accent">
-                                <span
-                                    className="w-1.5 h-1.5 rounded-full"
-                                    style={{ background: "hsl(var(--oas-forest))" }}
-                                />
-                                Part of the OpenAgriNet ecosystem
-                            </span>
-                            <span className="oas-eyebrow hidden sm:inline">
-                                00 · Overview
+                            <span className="oas-eyebrow">
+                                Overview
                             </span>
                         </motion.div>
 

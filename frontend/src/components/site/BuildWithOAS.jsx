@@ -21,7 +21,7 @@ export default function ComposableApplications() {
         <section id="build" data-testid="section-build" className="relative py-24 lg:py-32">
             <Section>
                 <SectionHeader
-                    eyebrow="05 · Build with Open Agri Stack"
+                    eyebrow="Build with Open Agri Stack"
                     title={<>Composable Applications.</>}
                     description="Applications are created by combining reusable infrastructure rather than building isolated systems. Open Agri Stack enables organizations to assemble solutions using interoperable building blocks."
                 />

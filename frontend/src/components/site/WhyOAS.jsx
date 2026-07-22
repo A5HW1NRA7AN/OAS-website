@@ -14,7 +14,7 @@ export default function WhyOAS() {
         <section id="why" data-testid="section-why" className="relative py-24 lg:py-32">
             <Section>
                 <SectionHeader
-                    eyebrow="01 · Why Open Agri Stack"
+                    eyebrow="Why Open Agri Stack"
                     title={<>Why Open Agri Stack?</>}
                     description="Open Agri Stack provides a shared digital foundation for agriculture by combining foundational Digital Public Infrastructure with agriculture-specific building blocks. Instead of building isolated systems from scratch, organizations can compose interoperable services using reusable components, open standards, and common registries."
                 />
@@ -48,9 +48,6 @@ export default function WhyOAS() {
                                     >
                                         <Icon size={20} strokeWidth={1.6} />
                                     </div>
-                                    <span className="mono text-[10.5px] tracking-[0.16em] text-oas-forest-soft">
-                                        0{i + 1} / 03
-                                    </span>
                                 </div>
                                 <h3 className="font-serif-display text-[28px] leading-[1.05] text-oas-ink">
                                     {p.title}

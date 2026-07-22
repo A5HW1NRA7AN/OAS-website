@@ -16,7 +16,7 @@ export default function ReferenceArchitecture() {
         >
             <Section>
                 <SectionHeader
-                    eyebrow="02 · Reference Architecture"
+                    eyebrow="Reference Architecture"
                     title={<>Reference Architecture</>}
                     description="The Open Agri Stack Reference Architecture is organized into three interoperable layers. Each layer builds upon the one below it, creating a modular foundation for digital agriculture applications."
                 />
@@ -80,9 +80,6 @@ function LayerCard({ layer, index }) {
                     <h3 className="font-serif-display text-[30px] lg:text-[36px] leading-none text-oas-ink">
                         {layer.title}
                     </h3>
-                    <span className="mono text-[10.5px] tracking-[0.16em] text-oas-forest-soft">
-                        {String(REFERENCE_LAYERS.length - index).padStart(2, "0")} / {String(REFERENCE_LAYERS.length).padStart(2, "0")}
-                    </span>
                 </div>
 
                 <p className="text-[15.5px] leading-[1.65] text-oas-ink-soft max-w-[820px]">

@@ -5,13 +5,13 @@
  */
 
 export const NAV_SECTIONS = [
-    { id: "hero", label: "Overview", chapter: "00" },
-    { id: "why", label: "Why", chapter: "01" },
-    { id: "architecture", label: "Architecture", chapter: "02" },
-    { id: "stack", label: "Stack", chapter: "03" },
-    { id: "registries", label: "Registries", chapter: "04" },
-    { id: "build", label: "Applications", chapter: "05" },
-    { id: "resources", label: "Resources", chapter: "06" },
+    { id: "hero", label: "Overview" },
+    { id: "why", label: "Why" },
+    { id: "architecture", label: "Architecture" },
+    { id: "stack", label: "Stack" },
+    { id: "registries", label: "Registries" },
+    { id: "build", label: "Applications" },
+    { id: "resources", label: "Resources" },
 ];
 
 /**

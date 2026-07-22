@@ -64,9 +64,6 @@ export default function Nav() {
                             onClick={() => scrollTo(s.id)}
                             className="relative px-3 py-2 text-[13.5px] text-oas-ink-soft hover:text-oas-ink transition-colors flex items-center gap-1.5"
                         >
-                            <span className="mono text-[9.5px] text-oas-ink-soft/60">
-                                {s.chapter}
-                            </span>
                             {s.label}
                             {active === s.id && (
                                 <motion.span
@@ -135,9 +132,6 @@ export default function Nav() {
                                     onClick={() => scrollTo(s.id)}
                                     className="text-left py-3 border-b border-oas-border text-oas-ink flex items-center gap-3"
                                 >
-                                    <span className="mono text-[10.5px] text-oas-ink-soft">
-                                        {s.chapter}
-                                    </span>
                                     {s.label}
                                 </button>
                             ))}

@@ -32,7 +32,7 @@ export default function Resources() {
         >
             <Section>
                 <SectionHeader
-                    eyebrow="06 · Resources"
+                    eyebrow="Resources"
                     title={<>Continue Exploring.</>}
                     description="Open Agri Stack is developed in the open. Explore the documentation, architecture, implementation guidance, and source code."
                 />

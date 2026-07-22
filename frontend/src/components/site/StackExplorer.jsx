@@ -11,7 +11,7 @@ export default function StackExplorer() {
         <section id="stack" data-testid="section-stack" className="relative py-24 lg:py-32">
             <Section>
                 <SectionHeader
-                    eyebrow="03 · The Open Agri Stack"
+                    eyebrow="The Open Agri Stack"
                     title={<>Explore the Stack.</>}
                     description="The Open Agri Stack implementation organizes core infrastructure into reusable layers that work together through secure interfaces, shared registries, and standardized data exchange."
                 />
